@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/search_button"
+        android:icon="@drawable/ic_search_button"
+        android:title="search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/option1"
+        android:title="option1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/option2"
+        android:title="option2"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/option3"
+        android:title="option3"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/suboption1"
+                android:title="Sub Option 1"/>
+            <item
+                android:id="@+id/suboption2"
+                android:title="Sub Option 2"/>
+            <item
+                android:id="@+id/suboption3"
+                android:title="Sub Option 3"/>
+        </menu>
+    </item>
+
+</menu>
