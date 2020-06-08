@@ -1,19 +1,20 @@
 package com.col740.myhospital
 
 import android.app.SearchManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.SearchEvent
-import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,10 +54,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val database = FirebaseDatabase.getInstance()
         if(item.itemId==R.id.option1){
-                    Toast.makeText(this, "Option1 is selected", Toast.LENGTH_SHORT).show()
+            //val database = FirebaseDatabase.getInstance()
+            val myRef = database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/friend")
+
+            myRef.setValue("Hello, Doctor!")
+            // Read from the database
+            // Read from the database
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+// whenever data at this location is updated.
+                    val value =
+                        dataSnapshot.getValue(String::class.java)!!
+                    //Log.d(FragmentActivity.TAG, "Value is: $value")
+                    Toast.makeText(this@MainActivity,value , Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCancelled(error: DatabaseError) { // Failed to read value
+                    Toast.makeText(this@MainActivity,"None" , Toast.LENGTH_SHORT).show()
+                    // Log.w(FragmentActivity.TAG, "Failed to read value.", error.toException())
+                }
+            })
+                    //Toast.makeText(this, "Option1 is selected", Toast.LENGTH_SHORT).show()
         }else if(item.itemId==R.id.option2){
-            Toast.makeText(this, "Option2 is selected", Toast.LENGTH_SHORT).show()
+            //val database = FirebaseDatabase.getInstance()
+            val myRef2 = database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com")
+
+            //myRef2.setValue("Hello, Friend!")
+            // Read from the database
+            // Read from the database
+            myRef2.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+// whenever data at this location is updated.
+                    val value =
+                        dataSnapshot.getValue()!!
+                    //Log.d(FragmentActivity.TAG, "Value is: $value")
+                    print(value.javaClass)
+                    Toast.makeText(this@MainActivity, arrayOf(value)[0].toString(), Toast.LENGTH_LONG).show()
+                }
+
+                override fun onCancelled(error: DatabaseError) { // Failed to read value
+                    Toast.makeText(this@MainActivity,"None" , Toast.LENGTH_SHORT).show()
+                    //Log.w(FragmentActivity.TAG, "Failed to read value.", error.toException())
+                }
+            })
+            //Toast.makeText(this, "Option2 is selected", Toast.LENGTH_SHORT).show()
         }else if(item.itemId==R.id.option3){
             Toast.makeText(this, "Option3 is selected", Toast.LENGTH_SHORT).show()
         }else if(item.itemId==R.id.suboption1){
