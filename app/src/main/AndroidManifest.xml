@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.col740.myhospital">
+    package="com.example.hospital">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,76 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Drawer"></activity>
+        <activity android:name=".DoctorDetails"
+            android:parentActivityName=".ListDoctor">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListDoctor" />
+        </activity>
+        <activity
+            android:name=".SignUp"
+            android:parentActivityName=".StartPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StartPage" />
+        </activity>
+        <activity android:name=".StartPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Drawer"/>
-        <activity android:name=".Expandablelistview"/>
-        <activity android:name=".SearchActivity"/>
-        <activity android:name=".ItemActivity"/>
-        <activity android:name=".YourAccount"/>
+        <activity
+            android:name=".LoginPage"
+            android:parentActivityName=".StartPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StartPage" />
+        </activity>
+        <activity
+            android:name=".ListDoctor"
+            android:parentActivityName=".StartPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StartPage" />
+        </activity>
+        <activity
+            android:name=".PatientRegister"
+            android:parentActivityName=".LoginPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginPage" />
+        </activity>
+        <activity
+            android:name=".TypeSelection"
+            android:parentActivityName=".LoginPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginPage" />
+        </activity>
+        <activity
+            android:name=".DoctorRegister"
+            android:parentActivityName=".StartPage">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StartPage" />
+        </activity>
     </application>
 
 </manifest>
