@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 class Start: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val loggedin: Boolean = true        //isko false kr dene se signup or login page khulta hai. Ise firebase se authentication maang k change krna hai
+        val loggedin: Boolean = false        //isko false kr dene se signup or login page khulta hai. Ise firebase se authentication maang k change krna hai
         if (!loggedin) {
             val intent = Intent(this, Signup::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

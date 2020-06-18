@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_searchitem.view.*
 
-class SearchAdapter(val context: Context, val searchitems : List<SearchItem>) : RecyclerView.Adapter<SearchAdapter.MyViewHolder>()  {
+class SearchAdapter(val context: Context, val searchitems : MutableList<SearchItem>) : RecyclerView.Adapter<SearchAdapter.MyViewHolder>()  {
    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var currentitem : SearchItem? = null
         var currentposition : Int = 0
@@ -19,6 +19,7 @@ class SearchAdapter(val context: Context, val searchitems : List<SearchItem>) : 
             itemView.setOnClickListener{
                 Toast.makeText(context, currentitem!!.title +" was Clicked", Toast.LENGTH_SHORT).show()
                 val intent = Intent(context, ItemActivity::class.java)
+                intent.putExtra("id", currentitem!!.id)
                 ContextCompat.startActivity(context, intent, null)
             }
         }
@@ -41,5 +42,6 @@ class SearchAdapter(val context: Context, val searchitems : List<SearchItem>) : 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val SearchItem = searchitems[position]
         holder.setData(SearchItem, position)
+
     }
 }
