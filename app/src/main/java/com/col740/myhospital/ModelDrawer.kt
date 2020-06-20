@@ -9,5 +9,6 @@ object Supplier_Drawer{
         DrawerItem("Your Bookings"),
         DrawerItem("Your Account"),
         DrawerItem("Settings"),
-        DrawerItem("Customer Service"))
+        DrawerItem("Customer Service"),
+        DrawerItem("Logout"))
 }

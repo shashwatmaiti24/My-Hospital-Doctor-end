@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.drawer.*
 import kotlinx.android.synthetic.main.searchview.*
 
-data class SearchItem(var title:String, var id:String?)
+data class SearchItem(var title:String, var id:String)
 class SearchActivity:AppCompatActivity() {
     object Supplier_Search{
         //    val searchitems = listOf<SearchItem>(
@@ -39,21 +39,30 @@ class SearchActivity:AppCompatActivity() {
             FirebaseDatabase.getInstance("https://my-hospital-fce56.firebaseio.com/")
         val doctors =
             database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/Doctor")
-        var s : Array<String> = emptyArray()
-        var email : Array<String> = emptyArray()
+//        var s : Array<String> = emptyArray()
+//        var email : Array<String> = emptyArray()
         doctors.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
 // whenever data at this location is updated.
 //                s = Array<String>(l.toInt() + 1){""}
 //                email = Array<String>(l.toInt() + 1){""}
 //                var j = 0
+                if(!Supplier_Search.searchitems.isEmpty()){
+                    Supplier_Search.searchitems = ArrayList()}
                 for (d in dataSnapshot.children) {
-//                    println(d.child("E-Mail").getValue(String::class.java).toString())
+//                    println(d.child("Name").getValue(String::class.java).toString())
+//                    println(d.key.toString())
 //                    println("_*_*_*_*_*_*_*_*_*__*_*__*_*__*_*")
-
-                    Supplier_Search.searchitems.add(SearchItem(d.child("Name").getValue(String::class.java).toString(),d.getKey()))
+                    if(d.child("Name").value!=null) {
+                        Supplier_Search.searchitems.add(
+                            SearchItem(
+                                d.child("Name").getValue(String::class.java).toString(),
+                                d.getKey()!!
+                            )
+                        )
 //                    email[j] = d.key.toString()
-  //                  j++
+                        //                  j++
+                    }
                 }
                 //                for (int i=1;i<(int)l;i++){
 //                    DataSnapshot d=dataSnapshot.child(Integer.toString(i));

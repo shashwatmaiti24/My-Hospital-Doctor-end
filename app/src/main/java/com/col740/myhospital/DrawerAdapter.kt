@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class DrawerAdapter(val context: Context, val draweritems : List<DrawerItem>) : RecyclerView.Adapter<DrawerAdapter.MyViewHolder>() {
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -34,6 +35,13 @@ class DrawerAdapter(val context: Context, val draweritems : List<DrawerItem>) : 
                 else if (currentitem!!.title=="Your Account") {
                     Toast.makeText(context, currentitem!!.title + " was Clicked", Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, YourAccount::class.java)
+                    startActivity(context, intent, null)
+                }else if (currentitem!!.title=="Logout") {
+                    Toast.makeText(context, currentitem!!.title + " was Clicked", Toast.LENGTH_SHORT).show()
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(context, LoginActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(context, intent, null)
                 }
             }

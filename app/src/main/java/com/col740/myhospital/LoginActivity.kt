@@ -130,28 +130,13 @@ class LoginActivity : AppCompatActivity() {
 //                                intent.putExtra("info", info)
 //                                startActivity(intent)
 //                            } else {
-                    val patient =
-                        database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/Patient/$id")
-                    patient.addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(data: DataSnapshot) {
-                            val info =
-                                arrayOf(
-                                    "Name",
-                                    "E-mail",
-                                    "Problem",
-                                    "Phone",
-                                    "Appointment"
-                                )
-                            for (i in info.indices) {
-                                info[i] =
-                                    data.child(info[i]).value.toString()
-                            }
+
                             intent.putExtra("id", id)
                             startActivity(intent)
-                        }
+//                        }
 
-                        override fun onCancelled(databaseError: DatabaseError) {}
-                    })
+//                        override fun onCancelled(databaseError: DatabaseError) {}
+//                    })
                 }
             }
 
