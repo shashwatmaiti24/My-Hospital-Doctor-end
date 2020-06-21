@@ -12,7 +12,7 @@ class Start: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val firebaseAuth:FirebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser: FirebaseUser? = firebaseAuth.getCurrentUser()
-        println(firebaseUser!!.email)
+       // println(firebaseUser!!.email)
         if (firebaseUser==null) {
             val intent = Intent(this, Signup::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

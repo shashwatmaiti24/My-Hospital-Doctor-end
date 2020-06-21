@@ -37,7 +37,7 @@ class Booking: AppCompatActivity() {
                 database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/Doctorbookings/$docid")
 
             println("------------------------------------------0")
-            doctor.addValueEventListener(object : ValueEventListener {
+            doctor.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(data: DataSnapshot) {
                     println("------------------------------------------1")
                     var slot:String?
@@ -49,7 +49,7 @@ class Booking: AppCompatActivity() {
                             slot = d.key
                             val setappointment =
                                 database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/Doctorbookings/$docid/$slot/bookedby")
-                            setappointment.child(patientid).setValue(problem)
+                            setappointment.child(patientid).setValue(problem.text.toString())
                             setappointment.child("elements").setValue(
                                 d.child("bookedby").child("elements").value.toString().toInt()+1)
                             break
