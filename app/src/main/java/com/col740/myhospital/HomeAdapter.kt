@@ -17,19 +17,12 @@ class HomeAdapter(val context: Context, val homeitems : List<HomeItem>): Recycle
 
         init {
             itemView.setOnClickListener{
-                Toast.makeText(context, currentitem!!.title +" was Clicked", Toast.LENGTH_SHORT).show()
-            }
-            itemView.imgShare.setOnClickListener {
-                val message : String = currentitem!!.title
-                val intent = Intent()
-                intent.action = Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_TEXT, message)
-                intent.type = "text/plain"
-                context.startActivity(Intent.createChooser(intent, "Share to :"))
+                Toast.makeText(context, currentitem!!.medicine +" was Clicked", Toast.LENGTH_SHORT).show()
             }
         }
         fun setData(item: HomeItem?, pos: Int){
-            itemView.txvTitle.text = item!!.title
+            itemView.medicine.text = item!!.medicine
+            itemView.dosage.text = item!!.dosage
             currentitem = item
             currentposition = pos
         }

@@ -24,7 +24,11 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
+data class HomeItem(var medicine:String, var dosage:String)
 class MainActivity : AppCompatActivity() {
+    object Supplier_Home{
+        var homeitems: MutableList<HomeItem> = ArrayList()
+    }
     private var id: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +40,48 @@ class MainActivity : AppCompatActivity() {
      //   val im1: ImageView = toolbar.findViewById(R.id.logo)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
-        val adapter = HomeAdapter(this,Supplier_Home.homeitems)
-        homerecycler.adapter = adapter
         id = intent.getStringExtra("id")
         toolbar_drawer.setOnClickListener ({ startDrawer() })
+        val database =
+            FirebaseDatabase.getInstance("https://my-hospital-fce56.firebaseio.com/")
+        val prescriptions =
+            database.getReferenceFromUrl("https://my-hospital-fce56.firebaseio.com/Prescription")
+        prescriptions.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+// whenever data at this location is updated.
+//                s = Array<String>(l.toInt() + 1){""}
+//                email = Array<String>(l.toInt() + 1){""}
+//                var j = 0
+//                if(!Supplier_Home.homeitems.isEmpty()){
+//                    Supplier_Home.homeitems = ArrayList()}
+                val e = dataSnapshot.child(id!!).child("elements").value.toString().toInt()
+                for (d in dataSnapshot.child(id!!).child(e.toString()).children) {
+//                    println(d.child("Name").getValue(String::class.java).toString())
+//                    println(d.key.toString())
+//                    println("_*_*_*_*_*_*_*_*_*__*_*__*_*__*_*")
+                    println(d.key)
+                    if(d.key!="Doctor") {
+                        Supplier_Home.homeitems.add(
+                            HomeItem(
+                                d.key!!,
+                                d.value.toString()
+                            )
+                        )
+//                    email[j] = d.key.toString()
+                        //                  j++
+                    }
+                }
+                val adapter = HomeAdapter(this@MainActivity,Supplier_Home.homeitems)
+                homerecycler.adapter = adapter
+                //                for (int i=1;i<(int)l;i++){
+//                    DataSnapshot d=dataSnapshot.child(Integer.toString(i));
+//                    s[i]=d.child("Name").getValue(String.class)+" - "+d.child("Specialisation").getValue(String.class)+" - "+d.child("Hospital").getValue(String.class);
+//                    email[i]=d.child("E-mail").getValue(String.class);
+//                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

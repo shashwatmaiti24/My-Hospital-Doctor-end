@@ -18,7 +18,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/txvTitle"
+            android:id="@+id/medicine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -28,13 +28,16 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-        <ImageView
-            android:id="@+id/imgShare"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@android:drawable/ic_menu_share"
-            android:tint="#eeeeee"/>
+        <TextView
+            android:id="@+id/dosage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Title"
+            android:textColor="#616161"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

@@ -25,6 +25,8 @@
         <activity android:name=".YourAccount" />
         <activity android:name=".Signup"/>
         <activity android:name=".Booking"/>
+        <activity android:name=".ConfirmBooking"/>
+        <activity android:name=".BookingConfirm"/>
     </application>
 
 </manifest>
